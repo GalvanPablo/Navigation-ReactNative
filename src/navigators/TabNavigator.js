@@ -2,32 +2,58 @@ import React, {Text} from 'react'
 import { StyleSheet, View } from 'react-native'
 
 import HomeNav from './HomeNav'
+import { Ionicons } from '@expo/vector-icons';
 import SettingsNav from './SettingsNav'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
-const BottomTabs = createBottomTabNavigator()
+const Tab = createBottomTabNavigator()
 
 
 
 const TabNavigator = () => {
     return (
-        <BottomTabs.Navigator
+        <Tab.Navigator
             screenOptions={{
-                headerShown: false
+                headerShown: false,
+                tabBarShowLabel: false,
+                tabBarStyle: styles.tabBar,
             }}
         >
-            <BottomTabs.Screen name="Inicio" component={HomeNav} />
-            <BottomTabs.Screen name="Ajustes" component={SettingsNav} />
-        </BottomTabs.Navigator>
+            <Tab.Screen name="Inicio" component={HomeNav} 
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={styles.tabBarIcon}>
+                            <Ionicons name="home-outline" size={24} color={focused ? 'black' : "#748C94"} />
+                            <Text>INICIO</Text>
+                        </View>
+                    ),
+                    // tabBarLabel: ({ focused }) => (
+                    //     <Text style={{ color: focused ? 'black' : "#748C94" }}>INICIO</Text>
+                    // )
+                }}
+            />
+            <Tab.Screen name="Ajustes" component={SettingsNav}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={styles.tabBarIcon}>
+                            <Ionicons name="settings-outline" size={24} color={focused ? 'black' : "#748C94"} />
+                        </View>
+                    )
+                }}
+            />
+        </Tab.Navigator>
     )
 }
 
 export default TabNavigator
 
 const styles = StyleSheet.create({
+    tabBar: {
+        height: 60,
+    },
     tabBarIcon: {
-        alignItems: 'center',
+        flex: 1,
         justifyContent: 'center',
-        top: 10
+        alignItems: 'center',
     }
 })
