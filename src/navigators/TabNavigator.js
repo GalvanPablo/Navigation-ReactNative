@@ -15,29 +15,42 @@ const TabNavigator = () => {
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,
-                tabBarShowLabel: false,
-                tabBarStyle: styles.tabBar,
+                tabBarStyle: { // Fondo de la barra de tabs
+                    height: 65,
+                },
+                tabBarItemStyle: { // Fondo de cada tab
+                    backgroundColor: 'red',
+                    margin: 10,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                },
+                tabBarLabelStyle: { // Texto
+                    fontFamily: 'OpenSans_400Regular',
+                    fontSize: 12,
+                    margin: 0,
+                    padding: 0,
+                },
+                tabBarIconStyle:{ // Fondo del icono
+                    margin: 0,
+                    padding: 0,
+                },
+                tabBarBadgeStyle:{ // Numero de notificaciones
+
+                },
             }}
         >
             <Tab.Screen name="Inicio" component={HomeNav} 
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={styles.tabBarIcon}>
-                            <Ionicons name="home-outline" size={24} color={focused ? 'black' : "#748C94"} />
-                            <Text>INICIO</Text>
-                        </View>
+                        <Ionicons name="home-outline" size={24} color={focused ? 'black' : "#748C94"} />
                     ),
-                    // tabBarLabel: ({ focused }) => (
-                    //     <Text style={{ color: focused ? 'black' : "#748C94" }}>INICIO</Text>
-                    // )
                 }}
             />
             <Tab.Screen name="Ajustes" component={SettingsNav}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <View style={styles.tabBarIcon}>
-                            <Ionicons name="settings-outline" size={24} color={focused ? 'black' : "#748C94"} />
-                        </View>
+                        <Ionicons name="settings-outline" size={24} color={focused ? 'black' : "#748C94"} />
                     )
                 }}
             />
@@ -47,13 +60,4 @@ const TabNavigator = () => {
 
 export default TabNavigator
 
-const styles = StyleSheet.create({
-    tabBar: {
-        height: 60,
-    },
-    tabBarIcon: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})
+const styles = StyleSheet.create({})
