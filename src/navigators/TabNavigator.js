@@ -1,8 +1,8 @@
-import React, {Text} from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
 import HomeNav from './HomeNav'
 import { Ionicons } from '@expo/vector-icons';
+import React from 'react'
 import SettingsNav from './SettingsNav'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
@@ -15,42 +15,27 @@ const TabNavigator = () => {
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,
-                tabBarStyle: { // Fondo de la barra de tabs
-                    height: 65,
-                },
-                tabBarItemStyle: { // Fondo de cada tab
-                    backgroundColor: 'red',
-                    margin: 10,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                },
-                tabBarLabelStyle: { // Texto
-                    fontFamily: 'OpenSans_400Regular',
-                    fontSize: 12,
-                    margin: 0,
-                    padding: 0,
-                },
-                tabBarIconStyle:{ // Fondo del icono
-                    margin: 0,
-                    padding: 0,
-                },
-                tabBarBadgeStyle:{ // Numero de notificaciones
-
-                },
+                tabBarShowLabel: false,
+                tabBarStyle: styles.tabBar,
             }}
         >
             <Tab.Screen name="Inicio" component={HomeNav} 
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name="home-outline" size={24} color={focused ? 'black' : "#748C94"} />
+                        <View style={styles.item}>
+                            <Ionicons name="home-outline" size={24} color={focused ? 'black' : "#748C94"} />
+                            <Text style={[styles.itemText, { color: focused ? 'black' : "#748C94" }]}>Inicio</Text>
+                        </View>
                     ),
                 }}
             />
             <Tab.Screen name="Ajustes" component={SettingsNav}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <Ionicons name="settings-outline" size={24} color={focused ? 'black' : "#748C94"} />
+                        <View style={styles.item}>
+                            <Ionicons name="settings-outline" size={24} color={focused ? 'black' : "#748C94"} />
+                            <Text style={[styles.itemText, { color: focused ? 'black' : "#748C94" }]}>Ajustes</Text>
+                        </View>
                     )
                 }}
             />
@@ -60,4 +45,16 @@ const TabNavigator = () => {
 
 export default TabNavigator
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    tabBar: {
+        minHeight: 60,
+        height: 70,
+    },
+    item: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    itemText:{
+        fontSize: 13,
+    },
+})
